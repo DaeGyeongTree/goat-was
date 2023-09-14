@@ -1,4 +1,4 @@
-package com.example.feverwas.base.jwt;
+package com.example.feverwas.base.jwt.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

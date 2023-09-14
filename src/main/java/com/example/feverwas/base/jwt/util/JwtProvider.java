@@ -1,17 +1,17 @@
-package com.example.feverwas.base.jwt;
+package com.example.feverwas.base.jwt.util;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.example.feverwas.base.jwt.config.JwtConfig;
 import com.example.feverwas.base.security.JpaUserDetailsService;
 import com.example.feverwas.boundedContext.auth.repository.RefreshTokenRepository;
 
