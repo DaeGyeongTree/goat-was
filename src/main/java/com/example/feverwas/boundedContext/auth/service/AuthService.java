@@ -17,6 +17,7 @@ public class AuthService {
 	private final KakaoService kakaoService;
 	private final MemberService memberService;
 	private final JwtProvider jwtProvider;
+	private final RefreshTokenService refreshTokenService;
 
 	public String getAuthorizationUrl() {
 		return kakaoService.getAuthorizationUrl();
@@ -32,7 +33,7 @@ public class AuthService {
 
 		if (!memberService.isExist(oAuthInfo.getEmail())) {
 			Member member = Member.builder()
-							.email(oAuthInfo.getEmail())
+							.username(oAuthInfo.getEmail())
 							.nickname(oAuthInfo.getNickname())
 							.build();
 			savedMember = memberService.create(member);
@@ -41,6 +42,15 @@ public class AuthService {
 		}
 
 		// JWT 토큰 발급
+		TokenDto tokenDto = TokenDto.builder()
+				.accessToken(jwtProvider.generateToken(oAuthInfo.getEmail(), savedMember.getId()))
+				.refreshToken(jwtProvider.generateRefreshToken(oAuthInfo.getEmail(), savedMember.getId()))
+				.build();
+
+		// Refresh Token 저장
+		refreshTokenService.storeRefreshToken(tokenDto, savedMember.getUsername());
+
+		// JWT 전송
 		return TokenDto.builder()
 				.accessToken(jwtProvider.generateToken(oAuthInfo.getEmail(), savedMember.getId()))
 				.refreshToken(jwtProvider.generateRefreshToken(oAuthInfo.getEmail(), savedMember.getId()))

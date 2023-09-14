@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,8 +39,8 @@ public class JwtProvider {
 				.setSubject(username)
 				.claim("userId", userId)
 				.setIssuer(jwtConfig.getIssuer())
-				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + jwtConfig.getExpirationTime()))
+				.setIssuedAt(new java.util.Date(System.currentTimeMillis()))
+				.setExpiration(new java.util.Date(System.currentTimeMillis() + jwtConfig.getExpirationTime()))
 				.signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, jwtConfig.getSecretKey().getBytes())
 				.compact();
 	}
@@ -125,7 +126,7 @@ public class JwtProvider {
 				.setSubject(username)
 				.claim("userId", userId)
 				.setIssuer(jwtConfig.getIssuer())
-				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.setIssuedAt(new java.util.Date(System.currentTimeMillis()))
 				.setExpiration(Date.from(Instant.now().plus(15, ChronoUnit.DAYS)))
 				.signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, jwtConfig.getSecretKey().getBytes())
 				.compact();
