@@ -8,11 +8,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@SuperBuilder
 public class Member extends BaseEntity {
 	@Column(length = 100, nullable = false, unique = true)
 	private String email;

@@ -31,6 +31,7 @@ public class KakaoService {
 	 * @return
 	 */
 	public String getAuthorizationUrl() {
+		System.out.println("redirectUri: " + kakaoConfig.getRedirectUri());
 		return UriComponentsBuilder
 				.fromUriString(kakaoConfig.getAuthorizationUri())
 				.queryParam("client_id", kakaoConfig.getClientId())
