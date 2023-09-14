@@ -37,6 +37,6 @@ public class AuthController implements AuthApi {
 
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response) {
-		authService.logout(request, response);
+
 	}
 }
