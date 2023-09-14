@@ -1,4 +1,4 @@
-package com.example.feverwas.base;
+package com.example.feverwas.base.entity;
 
 import java.time.LocalDateTime;
 
