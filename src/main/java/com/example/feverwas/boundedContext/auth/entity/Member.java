@@ -17,14 +17,14 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Member extends BaseEntity {
 	@Column(length = 100, nullable = false, unique = true)
-	private String email;
+	private String username;
 
 	@Column(length = 50, nullable = false)
 	private String nickname;
 
 	@Builder
-	public Member(String email, String nickname) {
-		this.email = email;
+	public Member(String username, String nickname) {
+		this.username = username;
 		this.nickname = nickname;
 	}
 }
