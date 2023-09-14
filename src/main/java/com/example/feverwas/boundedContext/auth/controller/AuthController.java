@@ -1,9 +1,11 @@
 package com.example.feverwas.boundedContext.auth.controller;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.feverwas.boundedContext.auth.api.AuthApi;
@@ -26,8 +28,8 @@ public class AuthController implements AuthApi {
 	}
 
 	@GetMapping("/sign-in/kakao/callback")
-	public void kakaoLoginCallback() {
-		authService.login();
+	public void kakaoLoginCallback(@RequestParam String code) throws MalformedURLException {
+		authService.login(code);
 	}
 
 	@Override

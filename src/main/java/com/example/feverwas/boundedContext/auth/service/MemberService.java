@@ -22,8 +22,8 @@ public class MemberService {
 		return memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 	}
 
-	public Member read(String username) {
-		return memberRepository.findByEmail(username).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+	public Member read(String email) {
+		return memberRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 	}
 
 	public boolean isExist(String email) {

@@ -19,4 +19,10 @@ public class Member extends BaseEntity {
 
 	@Column(length = 50, nullable = false)
 	private String nickname;
+
+	@Builder
+	public Member(String email, String nickname) {
+		this.email = email;
+		this.nickname = nickname;
+	}
 }
