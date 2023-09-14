@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public interface AuthApi {
 	@GetMapping("/login")
 	@Operation(summary = "카카오 로그인 메서드", description = "카카오 로그인을 하기 위한 메서드입니다.")
-	void kakaoLogin(HttpServletRequest request, HttpServletResponse response);
+	void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
 	@PostMapping("logout")
 	@Operation(summary = "로그아웃 메서드", description = "로그아웃을 하기 위한 메서드입니다.")

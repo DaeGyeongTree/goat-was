@@ -1,4 +1,4 @@
-package com.example.feverwas.base.security;
+package com.example.feverwas.base.security.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
