@@ -15,6 +15,10 @@ public class AuthService {
 	}
 
 	public void login() {
+		// 콜백을 통해 성공 여부 정함
 
+		// DB에 존재하지 않을 경우 저장
+
+		// JWT 토큰 발급
 	}
 }
