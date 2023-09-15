@@ -15,6 +15,6 @@ public class HashtagController implements HashtagApi {
 
 	@Override
 	public ResponseEntity<String> createHashtag(String tag) {
-		return ResponseEntity.ok(hashtagService.create(tag).getTag() + " 해시태그 생성 완료"
+		return ResponseEntity.ok(hashtagService.create(tag).getTag() + " 생성 완료");
 	}
 }
