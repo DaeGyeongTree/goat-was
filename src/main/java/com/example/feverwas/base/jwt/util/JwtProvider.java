@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,11 +23,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
+@PropertySource("classpath:application.yml")
 public class JwtProvider {
+	private final String secretKey;
+	private final long expiration;
+	private final String issuer;
 	private final JpaUserDetailsService userDetailsService;
 	private final RefreshTokenRepository refreshTokenRepository;
-	private final JwtConfig jwtConfig;
+
+	public JwtProvider(@Value("${jwt.secret-key}") String secretKey, @Value("${jwt.expiration-time}") long expiration,
+			@Value("${issuer}") String issuer, JpaUserDetailsService userDetailsService,
+			RefreshTokenRepository refreshTokenRepository) {
+		this.secretKey = secretKey;
+		this.expiration = expiration;
+		this.issuer = issuer;
+		this.userDetailsService = userDetailsService;
+		this.refreshTokenRepository = refreshTokenRepository;
+	}
 
 	/**
 	 * AccessToken 생성 메소드
@@ -38,10 +51,10 @@ public class JwtProvider {
 		return io.jsonwebtoken.Jwts.builder()
 				.setSubject(username)
 				.claim("userId", userId)
-				.setIssuer(jwtConfig.getIssuer())
+				.setIssuer(issuer)
 				.setIssuedAt(new java.util.Date(System.currentTimeMillis()))
-				.setExpiration(new java.util.Date(System.currentTimeMillis() + jwtConfig.getExpirationTime()))
-				.signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, jwtConfig.getSecretKey().getBytes())
+				.setExpiration(new java.util.Date(System.currentTimeMillis() + expiration))
+				.signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, secretKey.getBytes())
 				.compact();
 	}
 
@@ -59,7 +72,7 @@ public class JwtProvider {
 			} else {
 				token = token.split(" ")[1].trim();
 			}
-			Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(jwtConfig.getSecretKey().getBytes()).build().parseClaimsJws(token);
+			Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(secretKey.getBytes()).build().parseClaimsJws(token);
 			// 만료되었을 시 false
 			return !claims.getBody().getExpiration().before(new Date());
 		} catch (Exception e) {
@@ -96,7 +109,7 @@ public class JwtProvider {
 	 */
 	public String getUsername(String token) {
 		return Jwts.parserBuilder()
-				.setSigningKey(jwtConfig.getSecretKey().getBytes())
+				.setSigningKey(secretKey.getBytes())
 				.build()
 				.parseClaimsJws(token)
 				.getBody()
@@ -108,7 +121,7 @@ public class JwtProvider {
 	 */
 	public Long getUserId(String token) {
 		return Jwts.parserBuilder()
-				.setSigningKey(jwtConfig.getSecretKey().getBytes())
+				.setSigningKey(secretKey.getBytes())
 				.build()
 				.parseClaimsJws(token)
 				.getBody()
@@ -125,10 +138,10 @@ public class JwtProvider {
 		return io.jsonwebtoken.Jwts.builder()
 				.setSubject(username)
 				.claim("userId", userId)
-				.setIssuer(jwtConfig.getIssuer())
+				.setIssuer(issuer)
 				.setIssuedAt(new java.util.Date(System.currentTimeMillis()))
 				.setExpiration(Date.from(Instant.now().plus(15, ChronoUnit.DAYS)))
-				.signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, jwtConfig.getSecretKey().getBytes())
+				.signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, secretKey.getBytes())
 				.compact();
 	}
 
@@ -157,7 +170,7 @@ public class JwtProvider {
 	 */
 	public LocalDateTime getIssuedAt(String token) {
 		return Jwts.parserBuilder()
-				.setSigningKey(jwtConfig.getSecretKey().getBytes())
+				.setSigningKey(secretKey.getBytes())
 				.build()
 				.parseClaimsJws(token)
 				.getBody()
