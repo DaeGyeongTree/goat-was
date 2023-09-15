@@ -9,6 +9,8 @@ import com.example.feverwas.base.jwt.util.JwtProvider;
 import com.example.feverwas.boundedContext.auth.dto.OAuthInfo;
 import com.example.feverwas.boundedContext.auth.entity.Member;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -55,5 +57,11 @@ public class AuthService {
 				.accessToken(jwtProvider.generateToken(oAuthInfo.getEmail(), savedMember.getId()))
 				.refreshToken(jwtProvider.generateRefreshToken(oAuthInfo.getEmail(), savedMember.getId()))
 				.build();
+	}
+
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String accessToken = jwtProvider.resolveToken(request);
+		String username = jwtProvider.getUsername(accessToken);
+		refreshTokenService.deleteRefreshToken(username);
 	}
 }

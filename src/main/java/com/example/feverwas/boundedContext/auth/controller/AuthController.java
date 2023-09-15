@@ -36,7 +36,8 @@ public class AuthController implements AuthApi {
 	}
 
 	@Override
-	public void logout(HttpServletRequest request, HttpServletResponse response) {
-
+	public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		authService.logout(request, response);
+		return ResponseEntity.ok("로그아웃 성공");
 	}
 }

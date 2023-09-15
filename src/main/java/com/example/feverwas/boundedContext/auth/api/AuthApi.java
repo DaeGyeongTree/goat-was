@@ -2,6 +2,7 @@ package com.example.feverwas.boundedContext.auth.api;
 
 import java.io.IOException;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,5 +30,5 @@ public interface AuthApi {
 
 	@PostMapping("logout")
 	@Operation(summary = "로그아웃 메서드", description = "로그아웃을 하기 위한 메서드입니다.")
-	void logout(HttpServletRequest request, HttpServletResponse response);
+	ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
