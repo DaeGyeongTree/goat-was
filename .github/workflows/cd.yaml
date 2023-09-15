@@ -49,6 +49,11 @@ jobs:
           mkdir ./src/main/resources
           cd ./src/main/resources
           touch ./application.yml
+          echo "${{ secrets.APPLICATION_ENV }}" > ./application.yml
+          touch ./application-dev.yml
+          echo "${{ secrets.APPLICATION_DEV_ENV }}" > ./application-dev.yml
+          touch ./application-prod.yml
+          echo "${{ secrets.APPLICATION_PROD_ENV }}" > ./application-prod.yml
         shell: bash
 
       - name: Docker Build & Push
