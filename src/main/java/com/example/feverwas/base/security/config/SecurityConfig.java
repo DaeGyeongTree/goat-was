@@ -37,6 +37,7 @@ public class SecurityConfig {
 										"/auth/login/**",
 										"/auth/logout",
 										"/ingredients/**",
+										"/recipes/image",
 										"/swagger-resources/**",
 										"/swagger-ui/**",
 										"/v3/api-docs/**",
