@@ -21,17 +21,17 @@ import lombok.experimental.SuperBuilder;
 public class Recipe extends BaseEntity {
 	private String title;
 	private String content;
-	private String image_url;
+	private String imageUrl;
 
 	@ManyToOne
 	@JoinColumn(name = "member_id", nullable = false)
 	private Member member;
 
 	@Builder
-	public Recipe(String title, String content, String image_url, Member member) {
+	public Recipe(String title, String content, String imageUrl, Member member) {
 		this.title = title;
 		this.content = content;
-		this.image_url = image_url;
+		this.imageUrl = imageUrl;
 		this.member = member;
 	}
 }
