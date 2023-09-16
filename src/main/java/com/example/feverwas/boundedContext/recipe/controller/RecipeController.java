@@ -55,7 +55,7 @@ public class RecipeController implements RecipeApi {
 	@Override
 	public ResponseEntity<List<Recipe>> listRecommendRecipe(HttpServletRequest request) {
 		Long memberId = jwtProvider.getUserId(jwtProvider.resolveToken(request).substring(7));
-		List<MemberIngredient> memberIngredientList = memberIngredientService.list(memberId);
+		List<MemberIngredient> memberIngredientList = memberIngredientService.list(memberId, null, null);
 		List<Recipe> recipeList = recipeService.list().stream()
 				.filter(recipe ->
 					recipeIngredientService.list(recipe.getId()).stream()

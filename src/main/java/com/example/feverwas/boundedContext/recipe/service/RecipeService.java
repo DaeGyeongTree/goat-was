@@ -46,7 +46,7 @@ public class RecipeService {
 
 	public List<Recipe> recommendList(Long memberId) {
 		Member member = memberService.read(memberId);
-		List<MemberIngredient> memberIngredientList = memberIngredientService.list(memberId);
+		List<MemberIngredient> memberIngredientList = memberIngredientService.list(memberId, null, null);
 		List<Recipe> recipeList = recipeRepository.findAll();
 		return recipeRepository.findAll();
 	}

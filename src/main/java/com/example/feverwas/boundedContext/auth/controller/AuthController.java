@@ -53,8 +53,8 @@ public class AuthController implements AuthApi {
 	}
 
 	@Override
-	public ResponseEntity<List<MemberIngredient>> listIngredient(HttpServletRequest request) {
+	public ResponseEntity<List<MemberIngredient>> listIngredient(HttpServletRequest request, @RequestParam String category, @RequestParam String type) {
 		Long memberId = jwtProvider.getUserId(jwtProvider.resolveToken(request).substring(7));
-		return ResponseEntity.ok(memberIngredientService.list(memberId));
+		return ResponseEntity.ok(memberIngredientService.list(memberId, category, type));
 	}
 }
