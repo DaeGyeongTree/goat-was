@@ -14,6 +14,10 @@ import lombok.RequiredArgsConstructor;
 public class IngredientService {
 	private final IngredientRepository ingredientRepository;
 
+	public Ingredient read(Long id) {
+		return ingredientRepository.findById(id).orElseThrow();
+	}
+
 	public List<Ingredient> list() {
 		return ingredientRepository.findAll();
 	}
