@@ -37,6 +37,11 @@ public class Recipe extends BaseEntity {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "recipe")
 	private List<RecipeIngredient> recipeIngredient;
 
+	private String difficulty;
+	private String cookingTime;
+	private String serving;
+	private Integer viewCnt;
+
 	@Builder
 	public Recipe(String title, String content, String imageUrl, Member member) {
 		this.title = title;
