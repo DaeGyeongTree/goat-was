@@ -2,6 +2,7 @@ package com.example.feverwas.boundedContext.recipe.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.feverwas.base.jwt.util.JwtProvider;
 import com.example.feverwas.boundedContext.recipe.api.RecipeApi;
 import com.example.feverwas.boundedContext.recipe.dto.RecipeSaveDto;
+import com.example.feverwas.boundedContext.recipe.entity.Recipe;
 import com.example.feverwas.boundedContext.recipe.service.ObjectStorageService;
 import com.example.feverwas.boundedContext.recipe.service.RecipeService;
 
@@ -34,5 +36,10 @@ public class RecipeController implements RecipeApi {
 		Long memberId = jwtProvider.getUserId(jwtProvider.resolveToken(request).substring(7));
 		recipeService.create(memberId, recipeSaveDto);
 		return ResponseEntity.ok("레시피 등록 성공!");
+	}
+
+	@Override
+	public ResponseEntity<List<Recipe>> listRecipe() {
+		return ResponseEntity.ok(recipeService.list());
 	}
 }

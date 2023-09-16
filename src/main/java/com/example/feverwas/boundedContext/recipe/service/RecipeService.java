@@ -1,5 +1,7 @@
 package com.example.feverwas.boundedContext.recipe.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.feverwas.boundedContext.auth.entity.Member;
@@ -26,5 +28,9 @@ public class RecipeService {
 				.build();
 
 		return recipeRepository.save(recipe);
+	}
+
+	public List<Recipe> list() {
+		return recipeRepository.findAll();
 	}
 }
