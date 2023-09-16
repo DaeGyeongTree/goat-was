@@ -3,6 +3,7 @@ package com.example.feverwas.boundedContext.auth.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.feverwas.boundedContext.auth.entity.Member;
 import com.example.feverwas.boundedContext.auth.entity.MemberIngredient;
@@ -35,8 +36,29 @@ public class MemberIngredientService {
 		return memberIngredientRepository.save(memberIngredient);
 	}
 
-	public List<MemberIngredient> list(Long memberId) {
+	public List<MemberIngredient> list(Long memberId, String category, String type) {
 		Member member = memberService.read(memberId);
-		return memberIngredientRepository.findAll().stream().filter(memberIngredient -> memberIngredient.getMember().equals(member)).toList();
+
+		return memberIngredientRepository.findAll().stream()
+				.filter(memberIngredient -> {
+					return memberIngredient.getMember().equals(member);
+				})
+				.filter(memberIngredient -> {
+					if (category.equals(null)) {
+						return true;
+					} else {
+						return memberIngredient.getIngredient().getIngredientCategory().getName().equals(category);
+					}
+
+				})
+				.filter(memberIngredient -> {
+					if (type.equals(null)) {
+						return true;
+					} else {
+						return memberIngredient.getType().equals(type);
+					}
+
+				})
+				.toList();
 	}
 }

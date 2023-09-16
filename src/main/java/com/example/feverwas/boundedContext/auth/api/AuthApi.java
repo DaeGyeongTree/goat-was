@@ -40,5 +40,5 @@ public interface AuthApi {
 
 	@GetMapping("/ingredients")
 	@Operation(summary = "사용자 냉장고 재료 조회", description = "사용자 냉장고 재료를 조회하는 API 입니다.")
-	ResponseEntity<List<MemberIngredient>> listIngredient(HttpServletRequest request);
+	ResponseEntity<List<MemberIngredient>> listIngredient(HttpServletRequest request, @RequestParam String category, @RequestParam String type);
 }
