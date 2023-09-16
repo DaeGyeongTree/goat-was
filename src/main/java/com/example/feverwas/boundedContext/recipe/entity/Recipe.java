@@ -6,8 +6,10 @@ import com.example.feverwas.base.entity.BaseEntity;
 import com.example.feverwas.boundedContext.auth.entity.Member;
 import com.example.feverwas.boundedContext.ingredient.entity.IngredientCategory;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -32,8 +34,13 @@ public class Recipe extends BaseEntity {
 	@JoinColumn(name = "member_id", nullable = false)
 	private Member member;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "recipe")
 	private List<RecipeIngredient> recipeIngredient;
+
+	private String difficulty;
+	private String cookingTime;
+	private String serving;
+	private Integer viewCnt;
 
 	@Builder
 	public Recipe(String title, String content, String imageUrl, Member member) {

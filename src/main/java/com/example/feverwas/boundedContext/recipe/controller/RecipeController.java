@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,5 +67,10 @@ public class RecipeController implements RecipeApi {
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(recipeList);
+	}
+
+	@Override
+	public ResponseEntity<Recipe> readRecipe(HttpServletRequest request, @PathVariable Long recipeId) {
+		return ResponseEntity.ok(recipeService.read(recipeId));
 	}
 }

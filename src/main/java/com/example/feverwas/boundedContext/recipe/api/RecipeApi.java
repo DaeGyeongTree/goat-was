@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,4 +38,8 @@ public interface RecipeApi {
 	@GetMapping("/recommend")
 	@Operation(summary = "추천 레시피 조회", description = "사용자 추천 레시피를 조회하는 API 입니다.")
 	ResponseEntity<List<Recipe>> listRecommendRecipe(HttpServletRequest request);
+
+	@GetMapping("/{recipeId}")
+	@Operation(summary = "레시피 상세 조회", description = "레시피 상세를 조회하는 API 입니다.")
+	ResponseEntity<Recipe> readRecipe(HttpServletRequest request, @PathVariable Long recipeId);
 }
