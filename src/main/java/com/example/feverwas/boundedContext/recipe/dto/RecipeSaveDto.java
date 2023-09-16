@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,11 +16,19 @@ public class RecipeSaveDto {
 	private String content;
 	private String imageUrl;
 	private Long[] IntegredientIdList;
+	private String difficulty;
+	private String cookingTime;
+	private String serving;
 
-	public RecipeSaveDto(String title, String content, String imageUrl, Long[] integredientIdList) {
+	@Builder
+	public RecipeSaveDto(String title, String content, String imageUrl, Long[] IntegredientIdList, String difficulty,
+			String cookingTime, String serving) {
 		this.title = title;
 		this.content = content;
 		this.imageUrl = imageUrl;
-		this.IntegredientIdList = integredientIdList;
+		this.IntegredientIdList = IntegredientIdList;
+		this.difficulty = difficulty;
+		this.cookingTime = cookingTime;
+		this.serving = serving;
 	}
 }
