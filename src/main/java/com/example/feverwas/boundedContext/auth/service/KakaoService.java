@@ -96,7 +96,7 @@ public class KakaoService {
 		return tokenDto;
 	}
 
-	public OAuthInfo getUserInfo(TokenDto tokenDto) {
+	public OAuthInfo getUserInfo(String accessToken) {
 		OAuthInfo kakaoAccountInfo = null;
 
 		try {
@@ -107,7 +107,7 @@ public class KakaoService {
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
 
-			conn.setRequestProperty("Authorization", "Bearer " + tokenDto.getAccessToken());
+			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
 
 			int responseCode = conn.getResponseCode();
 

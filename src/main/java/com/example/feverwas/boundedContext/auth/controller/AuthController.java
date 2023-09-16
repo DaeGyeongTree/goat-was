@@ -34,8 +34,8 @@ public class AuthController implements AuthApi {
 	// }
 
 	@Override
-	public ResponseEntity<TokenDto> kakaoLoginCallback(@RequestParam String code) throws MalformedURLException {
-		TokenDto tokenDto = authService.login(code);
+	public ResponseEntity<TokenDto> kakaoLoginCallback(@RequestParam(name = "access_token") String accessToken) throws IOException {
+		TokenDto tokenDto = authService.login(accessToken);
 		return ResponseEntity.ok(tokenDto);
 	}
 

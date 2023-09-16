@@ -25,10 +25,10 @@ public class AuthService {
 		return kakaoService.getAuthorizationUrl();
 	}
 
-	public TokenDto login(String code) throws MalformedURLException {
+	public TokenDto login(String accessToken) throws MalformedURLException {
 		// 카카오 계정 정보 가져오기
-		TokenDto kakaoToken = kakaoService.getToken(code);
-		OAuthInfo oAuthInfo = kakaoService.getUserInfo(kakaoToken);
+		// TokenDto kakaoToken = kakaoService.getToken(code);
+		OAuthInfo oAuthInfo = kakaoService.getUserInfo(accessToken);
 
 		// DB에 존재하지 않을 경우 저장
 		Member savedMember;
