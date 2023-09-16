@@ -22,11 +22,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/auth")
 @Tag(name = "Auth", description = "사용자 인증 관련 API")
 public interface AuthApi {
-	@GetMapping("/login")
-	@Operation(summary = "로그인 메서드", description = "카카오 로그인 페이지로 이동하기 위한 API 입니다.")
-	void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws IOException;
+	// @GetMapping("/login")
+	// @Operation(summary = "로그인 메서드", description = "카카오 로그인 페이지로 이동하기 위한 API 입니다.")
+	// void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
-	@GetMapping("/login/callback")
+	@GetMapping("/login")
 	@Operation(summary = "로그인 메서드", description = "카카오 로그인이 실제 동작하는 메서드입니다. (API 호출 필요 없음)", hidden = true)
 	ResponseEntity<TokenDto> kakaoLoginCallback(@RequestParam String code) throws IOException;
 
