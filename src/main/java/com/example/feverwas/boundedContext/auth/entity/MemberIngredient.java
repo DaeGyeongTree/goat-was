@@ -1,5 +1,7 @@
 package com.example.feverwas.boundedContext.auth.entity;
 
+import java.time.LocalDate;
+
 import com.example.feverwas.base.entity.BaseEntity;
 import com.example.feverwas.boundedContext.ingredient.entity.Ingredient;
 
@@ -24,4 +26,11 @@ public class MemberIngredient extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "ingredient_id", nullable = false)
 	private Ingredient ingredient;
+
+	private LocalDate purchasedAt;
+
+	private LocalDate expiresAt;
+
+	private int quantity;
+
 }
