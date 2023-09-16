@@ -33,4 +33,8 @@ public interface RecipeApi {
 	@GetMapping
 	@Operation(summary = "레시피 조회", description = "레시피를 조회하는 API 입니다.")
 	ResponseEntity<List<Recipe>> listRecipe();
+
+	@GetMapping("/recommend")
+	@Operation(summary = "추천 레시피 조회", description = "사용자 추천 레시피를 조회하는 API 입니다.")
+	ResponseEntity<List<Recipe>> listRecommendRecipe(HttpServletRequest request);
 }

@@ -14,10 +14,12 @@ public class RecipeSaveDto {
 	private String title;
 	private String content;
 	private String imageUrl;
+	private Long[] IntegredientIdList;
 
-	public RecipeSaveDto(String title, String content, String imageUrl) {
+	public RecipeSaveDto(String title, String content, String imageUrl, Long[] integredientIdList) {
 		this.title = title;
 		this.content = content;
 		this.imageUrl = imageUrl;
+		this.IntegredientIdList = integredientIdList;
 	}
 }
