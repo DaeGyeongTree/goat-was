@@ -28,10 +28,10 @@ public class AuthController implements AuthApi {
 	private final MemberIngredientService memberIngredientService;
 	private final JwtProvider jwtProvider;
 
-	@Override
-	public void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect(authService.getAuthorizationUrl());
-	}
+	// @Override
+	// public void kakaoLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	// 	response.sendRedirect(authService.getAuthorizationUrl());
+	// }
 
 	@Override
 	public ResponseEntity<TokenDto> kakaoLoginCallback(@RequestParam String code) throws MalformedURLException {
