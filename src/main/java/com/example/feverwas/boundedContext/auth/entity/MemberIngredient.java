@@ -33,4 +33,5 @@ public class MemberIngredient extends BaseEntity {
 
 	private int quantity;
 
+	private String type;
 }

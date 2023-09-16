@@ -1,4 +1,6 @@
-package com.example.feverwas.boundedContext.ingredient.service;
+package com.example.feverwas.boundedContext.auth.service;
+
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -6,8 +8,9 @@ import com.example.feverwas.boundedContext.auth.entity.Member;
 import com.example.feverwas.boundedContext.auth.entity.MemberIngredient;
 import com.example.feverwas.boundedContext.auth.repository.MemberIngredientRepository;
 import com.example.feverwas.boundedContext.auth.service.MemberService;
-import com.example.feverwas.boundedContext.ingredient.dto.MemberIngredientSaveDto;
+import com.example.feverwas.boundedContext.auth.dto.MemberIngredientSaveDto;
 import com.example.feverwas.boundedContext.ingredient.entity.Ingredient;
+import com.example.feverwas.boundedContext.ingredient.service.IngredientService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +30,13 @@ public class MemberIngredientService {
 				.purchasedAt(memberIngredientSaveDto.getPurchasedAt())
 				.expiresAt(memberIngredientSaveDto.getExpiresAt())
 				.quantity(memberIngredientSaveDto.getQuantity())
+				.type(memberIngredientSaveDto.getType())
 				.build();
 		return memberIngredientRepository.save(memberIngredient);
+	}
+
+	public List<MemberIngredient> list(Long memberId) {
+		Member member = memberService.read(memberId);
+		return memberIngredientRepository.findAll().stream().filter(memberIngredient -> memberIngredient.getMember().equals(member)).toList();
 	}
 }
