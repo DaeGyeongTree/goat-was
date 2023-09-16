@@ -28,7 +28,7 @@ public interface AuthApi {
 
 	@GetMapping("/login")
 	@Operation(summary = "로그인 메서드", description = "카카오 로그인이 실제 동작하는 메서드입니다. (API 호출 필요 없음)", hidden = true)
-	ResponseEntity<TokenDto> kakaoLoginCallback(@RequestParam String code) throws IOException;
+	ResponseEntity<TokenDto> kakaoLoginCallback(@RequestParam String accessToken) throws IOException;
 
 	@PostMapping("/logout")
 	@Operation(summary = "로그아웃 메서드", description = "로그아웃을 하기 위한 메서드입니다.")
