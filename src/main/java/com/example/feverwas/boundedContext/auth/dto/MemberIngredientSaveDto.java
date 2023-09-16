@@ -1,4 +1,4 @@
-package com.example.feverwas.boundedContext.ingredient.dto;
+package com.example.feverwas.boundedContext.auth.dto;
 
 import java.time.LocalDate;
 
@@ -17,4 +17,5 @@ public class MemberIngredientSaveDto {
 	private LocalDate purchasedAt;
 	private LocalDate expiresAt;
 	private int quantity;
+	private String type;
 }
